@@ -1,0 +1,12 @@
+{
+  "name": "StickS3 Voice Inbox",
+  "short_name": "StickS3",
+  "description": "M5StickS3 语音收件箱与番茄钟手机模拟器",
+  "lang": "zh-CN",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait-primary",
+  "background_color": "#f4f0e8",
+  "theme_color": "#14382f"
+}

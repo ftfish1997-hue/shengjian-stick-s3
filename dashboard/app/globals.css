@@ -1,0 +1,774 @@
+@import "tailwindcss";
+
+:root {
+  --ink: #171916;
+  --ink-soft: #31352f;
+  --paper: #f3f0e7;
+  --paper-deep: #e8e3d7;
+  --acid: #d7ff64;
+  --acid-soft: #e9ffad;
+  --coral: #ff8065;
+  --sky: #b9dbff;
+  --line: rgba(23, 25, 22, 0.16);
+  --white-line: rgba(255, 255, 255, 0.16);
+  --shadow: 0 24px 70px rgba(18, 22, 16, 0.12);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font-family:
+    "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Noto Sans CJK SC",
+    system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button,
+audio {
+  font: inherit;
+}
+
+.hero {
+  min-height: 720px;
+  padding: 0 clamp(22px, 5vw, 76px) 56px;
+  overflow: hidden;
+  color: #f8f7f1;
+  background:
+    radial-gradient(circle at 78% 12%, rgba(215, 255, 100, 0.17), transparent 23%),
+    radial-gradient(circle at 7% 87%, rgba(185, 219, 255, 0.12), transparent 29%),
+    var(--ink);
+}
+
+.topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  max-width: 1280px;
+  height: 88px;
+  margin: 0 auto;
+  border-bottom: 1px solid var(--white-line);
+}
+
+.brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 11px;
+  font-size: 20px;
+  font-weight: 760;
+  letter-spacing: 0.08em;
+}
+
+.brand-mark {
+  display: grid;
+  width: 36px;
+  height: 36px;
+  place-items: center;
+  color: var(--ink);
+  background: var(--acid);
+  border-radius: 50%;
+  font-size: 16px;
+  font-weight: 800;
+  letter-spacing: 0;
+}
+
+.nav-links {
+  display: flex;
+  gap: clamp(18px, 3vw, 42px);
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 14px;
+}
+
+.nav-links a {
+  transition: color 180ms ease;
+}
+
+.nav-links a:hover,
+.nav-links a:focus-visible {
+  color: var(--acid);
+}
+
+.hero-content {
+  display: grid;
+  grid-template-columns: minmax(0, 1.35fr) minmax(290px, 0.65fr);
+  gap: clamp(48px, 8vw, 130px);
+  align-items: center;
+  max-width: 1280px;
+  min-height: 520px;
+  margin: 0 auto;
+  padding: 64px 0 30px;
+}
+
+.eyebrow,
+.section-kicker {
+  margin: 0 0 20px;
+  color: var(--acid);
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+}
+
+.hero h1 {
+  max-width: 800px;
+  margin: 0;
+  font-family: "Songti SC", "STSong", "Noto Serif CJK SC", serif;
+  font-size: clamp(46px, 6vw, 82px);
+  font-weight: 650;
+  line-height: 1.08;
+  letter-spacing: -0.05em;
+}
+
+.hero-copy {
+  max-width: 610px;
+  margin: 30px 0 0;
+  color: rgba(255, 255, 255, 0.64);
+  font-size: clamp(16px, 1.7vw, 20px);
+  line-height: 1.8;
+}
+
+.device-card {
+  position: relative;
+  min-height: 360px;
+  padding: 38px;
+  overflow: hidden;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 32px;
+  box-shadow: 0 30px 80px rgba(0, 0, 0, 0.25);
+  backdrop-filter: blur(18px);
+}
+
+.device-orbit {
+  position: relative;
+  width: 154px;
+  height: 154px;
+  margin: 0 auto 34px;
+  border: 1px solid rgba(215, 255, 100, 0.35);
+  border-radius: 50%;
+}
+
+.device-orbit::before,
+.device-orbit::after {
+  position: absolute;
+  content: "";
+  inset: 18px;
+  border: 1px solid rgba(215, 255, 100, 0.22);
+  border-radius: 50%;
+}
+
+.device-orbit::after {
+  inset: 49px;
+  background: var(--acid);
+  border: 0;
+  box-shadow: 0 0 55px rgba(215, 255, 100, 0.48);
+}
+
+.device-orbit span {
+  position: absolute;
+  z-index: 1;
+  width: 8px;
+  height: 8px;
+  background: var(--acid);
+  border-radius: 50%;
+}
+
+.device-orbit span:nth-child(1) {
+  top: 15px;
+  left: 36px;
+}
+
+.device-orbit span:nth-child(2) {
+  right: 8px;
+  bottom: 54px;
+}
+
+.device-orbit span:nth-child(3) {
+  bottom: 7px;
+  left: 55px;
+}
+
+.device-status-line {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  margin-bottom: 10px;
+  color: rgba(255, 255, 255, 0.56);
+  font-size: 13px;
+}
+
+.live-dot {
+  width: 8px;
+  height: 8px;
+  background: var(--acid);
+  border-radius: 50%;
+  box-shadow: 0 0 14px rgba(215, 255, 100, 0.8);
+}
+
+.live-dot.muted {
+  background: #777;
+  box-shadow: none;
+}
+
+.device-card > strong {
+  display: block;
+  font-size: 26px;
+  letter-spacing: -0.02em;
+}
+
+.device-card dl {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+  margin: 30px 0 0;
+  padding-top: 24px;
+  border-top: 1px solid var(--white-line);
+}
+
+.device-card dl div,
+.daily-card dl div {
+  display: grid;
+  gap: 6px;
+}
+
+.device-card dt,
+.daily-card dt {
+  color: rgba(255, 255, 255, 0.46);
+  font-size: 12px;
+}
+
+.device-card dd,
+.daily-card dd {
+  margin: 0;
+  font-size: 13px;
+}
+
+.preview-banner,
+.error-banner {
+  display: flex;
+  gap: 12px;
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 14px 18px;
+  border-radius: 12px;
+  font-size: 13px;
+}
+
+.preview-banner {
+  color: var(--ink);
+  background: var(--acid);
+}
+
+.error-banner {
+  color: #2f130e;
+  background: #ffb4a4;
+}
+
+.error-banner span {
+  opacity: 0.72;
+}
+
+.stats {
+  position: relative;
+  z-index: 2;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  max-width: 1160px;
+  margin: -42px auto 0;
+  background: #fffef9;
+  border: 1px solid var(--line);
+  border-radius: 24px;
+  box-shadow: var(--shadow);
+}
+
+.stats article {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 4px 16px;
+  padding: 28px 32px;
+  border-right: 1px solid var(--line);
+}
+
+.stats article:last-child {
+  border-right: 0;
+}
+
+.stats span {
+  align-self: end;
+  color: #71766d;
+  font-size: 13px;
+}
+
+.stats strong {
+  grid-row: span 2;
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 36px;
+  font-weight: 650;
+  line-height: 1;
+}
+
+.stats small {
+  color: #9a9e96;
+  font-size: 11px;
+}
+
+.content-section,
+.review-section,
+.weekly-section {
+  padding: 112px clamp(22px, 5vw, 76px);
+}
+
+.content-section {
+  max-width: 1390px;
+  margin: 0 auto;
+}
+
+.section-heading {
+  display: flex;
+  align-items: end;
+  justify-content: space-between;
+  gap: 30px;
+  margin-bottom: 38px;
+}
+
+.section-heading h2,
+.weekly-intro h2 {
+  margin: 0;
+  font-family: "Songti SC", "STSong", "Noto Serif CJK SC", serif;
+  font-size: clamp(36px, 4vw, 56px);
+  letter-spacing: -0.04em;
+}
+
+.section-heading .section-kicker,
+.weekly-intro .section-kicker {
+  margin-bottom: 10px;
+  color: #6c792f;
+}
+
+.section-heading > p {
+  max-width: 390px;
+  margin: 0 0 5px;
+  color: #747970;
+  font-size: 13px;
+  line-height: 1.7;
+}
+
+.record-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 18px;
+}
+
+.record-card {
+  padding: 28px;
+  background: #fffef9;
+  border: 1px solid var(--line);
+  border-radius: 22px;
+  transition:
+    transform 180ms ease,
+    box-shadow 180ms ease;
+}
+
+.record-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 18px 50px rgba(18, 22, 16, 0.09);
+}
+
+.record-card-top,
+.record-footer,
+.daily-date,
+.weekly-card-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+}
+
+.record-meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px;
+  color: #80857c;
+  font-size: 11px;
+}
+
+.record-type,
+.project-chip {
+  padding: 6px 9px;
+  color: #3f451f;
+  background: var(--acid-soft);
+  border-radius: 999px;
+  font-weight: 700;
+}
+
+.record-card h3 {
+  margin: 25px 0 10px;
+  font-size: 20px;
+  letter-spacing: -0.02em;
+}
+
+.transcript {
+  min-height: 52px;
+  margin: 0;
+  color: #676c64;
+  font-family: "Songti SC", "STSong", serif;
+  font-size: 16px;
+  line-height: 1.65;
+}
+
+.record-footer {
+  margin-top: 25px;
+  padding-top: 20px;
+  border-top: 1px solid var(--line);
+}
+
+.record-footer audio {
+  width: min(320px, 72%);
+  height: 34px;
+}
+
+.audio-unavailable {
+  color: #a0a49d;
+  font-size: 12px;
+}
+
+.project-chip {
+  color: #36506b;
+  background: #e3f0ff;
+  font-size: 10px;
+}
+
+.status {
+  display: inline-flex;
+  align-items: center;
+  width: fit-content;
+  padding: 5px 9px;
+  border-radius: 999px;
+  font-size: 10px;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.status-success {
+  color: #385000;
+  background: var(--acid-soft);
+}
+
+.status-progress {
+  color: #344c63;
+  background: #dfeeff;
+}
+
+.status-error {
+  color: #702311;
+  background: #ffd6cd;
+}
+
+.review-section {
+  color: #f7f7f1;
+  background: var(--ink-soft);
+}
+
+.section-heading.light {
+  max-width: 1240px;
+  margin-right: auto;
+  margin-left: auto;
+}
+
+.section-heading.light .section-kicker {
+  color: var(--acid);
+}
+
+.section-heading.light > p {
+  color: rgba(255, 255, 255, 0.54);
+}
+
+.daily-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 16px;
+  max-width: 1240px;
+  margin: 0 auto;
+}
+
+.daily-card {
+  padding: 26px;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.11);
+  border-radius: 20px;
+}
+
+.daily-date strong {
+  font-size: 14px;
+}
+
+.daily-card > p {
+  min-height: 114px;
+  margin: 36px 0;
+  color: rgba(255, 255, 255, 0.73);
+  font-family: "Songti SC", "STSong", serif;
+  font-size: 17px;
+  line-height: 1.75;
+}
+
+.daily-card dl {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 12px;
+  margin: 0;
+  padding-top: 18px;
+  border-top: 1px solid rgba(255, 255, 255, 0.11);
+}
+
+.daily-card dt {
+  font-size: 10px;
+}
+
+.daily-card dd {
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 16px;
+}
+
+.weekly-section {
+  display: grid;
+  grid-template-columns: minmax(0, 0.8fr) minmax(420px, 1.2fr);
+  gap: clamp(40px, 8vw, 130px);
+  align-items: center;
+  max-width: 1390px;
+  margin: 0 auto;
+}
+
+.weekly-intro > p:last-child {
+  max-width: 500px;
+  color: #696e66;
+  line-height: 1.85;
+}
+
+.weekly-card {
+  min-height: 380px;
+  padding: clamp(30px, 5vw, 58px);
+  color: #f7f7f1;
+  background:
+    radial-gradient(circle at 100% 0, rgba(215, 255, 100, 0.18), transparent 30%),
+    var(--ink);
+  border-radius: 30px;
+  box-shadow: var(--shadow);
+}
+
+.weekly-card-head {
+  color: rgba(255, 255, 255, 0.52);
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 11px;
+  letter-spacing: 0.08em;
+}
+
+.weekly-card h3 {
+  max-width: 640px;
+  margin: 54px 0;
+  font-family: "Songti SC", "STSong", serif;
+  font-size: clamp(24px, 3vw, 38px);
+  font-weight: 500;
+  line-height: 1.55;
+}
+
+.weekly-metrics {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+  padding-top: 25px;
+  border-top: 1px solid var(--white-line);
+}
+
+.weekly-metrics div {
+  display: grid;
+  gap: 7px;
+}
+
+.weekly-metrics strong {
+  color: var(--acid);
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 28px;
+}
+
+.weekly-metrics span {
+  color: rgba(255, 255, 255, 0.5);
+  font-size: 11px;
+}
+
+.empty-state {
+  grid-column: 1 / -1;
+  display: grid;
+  min-height: 170px;
+  place-items: center;
+  padding: 32px;
+  color: #858a81;
+  background: rgba(255, 255, 255, 0.045);
+  border: 1px dashed currentColor;
+  border-radius: 18px;
+  text-align: center;
+}
+
+footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 30px;
+  padding: 38px clamp(22px, 5vw, 76px);
+  color: rgba(255, 255, 255, 0.5);
+  background: var(--ink);
+  border-top: 1px solid var(--white-line);
+  font-size: 11px;
+}
+
+.footer-brand {
+  color: #fff;
+}
+
+@media (max-width: 980px) {
+  .hero-content,
+  .weekly-section {
+    grid-template-columns: 1fr;
+  }
+
+  .device-card {
+    min-height: 0;
+  }
+
+  .stats {
+    grid-template-columns: repeat(2, 1fr);
+    margin-right: 22px;
+    margin-left: 22px;
+  }
+
+  .stats article:nth-child(2) {
+    border-right: 0;
+  }
+
+  .stats article:nth-child(-n + 2) {
+    border-bottom: 1px solid var(--line);
+  }
+
+  .daily-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (max-width: 680px) {
+  .hero {
+    min-height: 0;
+    padding-bottom: 48px;
+  }
+
+  .topbar {
+    height: 72px;
+  }
+
+  .nav-links {
+    gap: 16px;
+    font-size: 12px;
+  }
+
+  .hero-content {
+    gap: 36px;
+    padding-top: 48px;
+  }
+
+  .hero h1 {
+    font-size: 43px;
+  }
+
+  .device-card {
+    padding: 28px;
+    border-radius: 24px;
+  }
+
+  .device-orbit {
+    width: 120px;
+    height: 120px;
+  }
+
+  .stats {
+    margin-top: -22px;
+    border-radius: 18px;
+  }
+
+  .stats article {
+    padding: 20px;
+  }
+
+  .stats strong {
+    font-size: 28px;
+  }
+
+  .content-section,
+  .review-section,
+  .weekly-section {
+    padding-top: 78px;
+    padding-bottom: 78px;
+  }
+
+  .section-heading {
+    display: grid;
+    align-items: start;
+  }
+
+  .record-grid,
+  .daily-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .record-card {
+    padding: 22px;
+  }
+
+  .record-footer {
+    align-items: flex-end;
+  }
+
+  .record-footer audio {
+    width: 100%;
+  }
+
+  .weekly-section {
+    min-width: 0;
+  }
+
+  .weekly-card {
+    min-height: 0;
+    padding: 28px;
+    border-radius: 24px;
+  }
+
+  .weekly-metrics {
+    gap: 14px;
+  }
+
+  footer {
+    display: grid;
+    justify-content: start;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  .record-card {
+    transition: none;
+  }
+}

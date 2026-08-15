@@ -1,0 +1,33 @@
+[
+  {
+    "raw_text": "记录一个用蓝色指示待同步状态的界面想法。",
+    "expected_type": "idea",
+    "must_not_invent": ["截止时间", "负责人", "预算"]
+  },
+  {
+    "raw_text": "明天提醒我测试离线录音恢复。",
+    "expected_type": "task",
+    "expected_completed": false,
+    "relative_date_requires": ["captured_at", "timezone"]
+  },
+  {
+    "raw_text": "今天完成了第一次完整的本地演示。",
+    "expected_type": "journal",
+    "must_not_invent": ["未提及的人名", "外部链接"]
+  },
+  {
+    "raw_text": "下午散步二十分钟。",
+    "expected_type": "activity",
+    "must_not_invent": ["路线", "心率", "消耗热量"]
+  },
+  {
+    "raw_text": "测试设备使用一根 USB-C 数据线连接电脑。",
+    "expected_type": "note",
+    "must_not_invent": ["设备序列号", "电脑账户"]
+  },
+  {
+    "raw_text": "先记一下，稍后再整理。",
+    "expected_type": "inbox",
+    "reason": "内容没有足够信息支持更具体的分类"
+  }
+]

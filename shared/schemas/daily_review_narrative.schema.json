@@ -1,0 +1,15 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.local/schemas/daily_review_narrative.schema.json",
+  "title": "Daily review narrative generated from deterministic facts",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "narrative": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 3000
+    }
+  },
+  "required": ["narrative"]
+}

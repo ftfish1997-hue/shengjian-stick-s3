@@ -1,0 +1,69 @@
+name: CI
+
+on:
+  push:
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  source-and-contracts:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - name: Python simulator tests
+        run: python3 -m unittest discover -s simulator/tests -v
+      - name: Host script tests
+        run: python3 -m unittest discover -s scripts/tests -v
+      - name: Pomodoro logic test
+        run: make pomodoro-logic-test
+      - name: Validate JSON contracts and fixtures
+        run: make validate-json
+      - name: Supabase shared logic tests
+        run: node --experimental-strip-types --test supabase/functions/_shared/*.test.mjs
+      - name: Check Edge Function syntax
+        shell: bash
+        run: |
+          for file in supabase/functions/*/index.ts; do
+            node --experimental-strip-types --check "$file"
+          done
+      - name: Audit public source
+        run: make public-audit
+
+  dashboard:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: npm
+          cache-dependency-path: dashboard/package-lock.json
+      - name: Install dependencies
+        working-directory: dashboard
+        run: npm ci
+      - name: Lint
+        working-directory: dashboard
+        run: npm run lint
+      - name: Build and test rendered HTML
+        working-directory: dashboard
+        run: npm test
+
+  firmware:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Install PlatformIO
+        run: pip install platformio
+      - name: Build firmware
+        run: PLATFORMIO_CORE_DIR="$PWD/.platformio-core" pio run -d firmware

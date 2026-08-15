@@ -1,0 +1,151 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta name="theme-color" content="#14382f" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <meta name="apple-mobile-web-app-title" content="StickS3" />
+    <meta name="format-detection" content="telephone=no" />
+    <title>StickS3 手机模拟器</title>
+    <link rel="manifest" href="./manifest.webmanifest" />
+    <link rel="stylesheet" href="./app.css" />
+  </head>
+  <body>
+    <main class="app-shell">
+      <header class="topbar">
+        <div>
+          <p class="eyebrow">STICKS3 · STAGE 0</p>
+          <h1>语音收件箱</h1>
+        </div>
+        <button id="network-pill" class="status-pill" type="button" aria-label="切换模拟网络状态">
+          <span class="status-dot"></span><span id="network-label">在线</span>
+        </button>
+      </header>
+
+      <section id="compatibility-banner" class="notice" hidden>
+        <strong id="compatibility-title">需要安全连接</strong>
+        <span id="compatibility-copy">iPhone 麦克风只能在 HTTPS 页面中启用。</span>
+      </section>
+
+      <section id="voice-view" class="view active" aria-labelledby="voice-tab">
+        <div class="hero-card">
+          <div class="hero-copy">
+            <p class="section-kicker">QUICK CAPTURE</p>
+            <h2 id="record-title">想到什么，就录下来</h2>
+            <p id="record-hint">录音会先保存在这台 iPhone，再尝试同步。</p>
+          </div>
+
+          <div class="record-zone">
+            <div class="record-rings" aria-hidden="true"></div>
+            <button id="record-button" class="record-button" type="button" aria-label="开始录音">
+              <span class="mic-mark"></span>
+            </button>
+            <div id="record-timer" class="record-timer" aria-live="polite">00:00</div>
+          </div>
+
+          <div class="hero-meta">
+            <span>WAV</span><span>16 kHz</span><span>16-bit</span><span>Mono</span>
+          </div>
+        </div>
+
+        <div class="section-heading">
+          <div>
+            <p class="section-kicker">LOCAL FIRST</p>
+            <h2>待同步队列</h2>
+          </div>
+          <span id="queue-count" class="count-badge">0</span>
+        </div>
+
+        <div id="queue-list" class="record-list" aria-live="polite"></div>
+        <div id="queue-empty" class="empty-state">
+          <span class="empty-icon">⌁</span>
+          <strong>收件箱是空的</strong>
+          <p>第一条录音会带着唯一 event_id 安全落到本地。</p>
+        </div>
+
+        <button id="sync-button" class="primary-action" type="button">
+          <span>同步全部</span><span id="sync-detail">没有待同步录音</span>
+        </button>
+      </section>
+
+      <section id="focus-view" class="view" aria-labelledby="focus-tab" hidden>
+        <div class="focus-card">
+          <div class="focus-orbit" aria-hidden="true"></div>
+          <p class="section-kicker">DEEP FOCUS</p>
+          <div id="focus-time" class="focus-time">25:00</div>
+          <p id="focus-status" class="focus-status">准备开始一段专注</p>
+
+          <div class="preset-row" aria-label="番茄钟时长">
+            <button class="preset active" type="button" data-seconds="1500">25 分钟</button>
+            <button class="preset" type="button" data-seconds="300">5 分钟</button>
+            <button class="preset" type="button" data-seconds="60">1 分钟测试</button>
+          </div>
+
+          <div class="focus-actions">
+            <button id="focus-main" class="focus-main" type="button">开始专注</button>
+            <button id="focus-reset" class="icon-action" type="button" aria-label="结束并重置番茄钟">↺</button>
+          </div>
+        </div>
+
+        <button id="note-button" class="note-action" type="button" disabled>
+          <span class="note-icon">●</span>
+          <span><strong>录制专注备注</strong><small>自动关联当前 session_id</small></span>
+        </button>
+
+        <button id="reboot-button" class="secondary-action" type="button">模拟设备重启中断</button>
+      </section>
+
+      <section id="history-view" class="view" aria-labelledby="history-tab" hidden>
+        <div class="section-heading history-heading">
+          <div>
+            <p class="section-kicker">FAKE CLOUD</p>
+            <h2>处理流水线</h2>
+          </div>
+          <span id="cloud-count" class="count-badge">0</span>
+        </div>
+        <p class="section-intro">这里模拟 Supabase、转写、结构化和 Notion，不调用真实服务。</p>
+        <div id="history-list" class="history-list"></div>
+        <div id="history-empty" class="empty-state">
+          <span class="empty-icon">◇</span>
+          <strong>还没有云端记录</strong>
+          <p>同步一条录音后，可以看到完整状态推进。</p>
+        </div>
+
+        <details class="test-panel">
+          <summary>故障注入与设备信息</summary>
+          <label class="switch-row">
+            <span><strong>丢失下一次响应</strong><small>服务端已保存，手机收不到确认</small></span>
+            <input id="drop-response" type="checkbox" />
+          </label>
+          <label class="switch-row">
+            <span><strong>返回错误 event_id</strong><small>本地文件必须继续保留</small></span>
+            <input id="wrong-ack" type="checkbox" />
+          </label>
+          <button id="persist-button" class="secondary-action" type="button">请求保留离线数据</button>
+          <dl class="device-grid">
+            <div><dt>连接</dt><dd id="secure-state">检查中</dd></div>
+            <div><dt>存储</dt><dd id="storage-state">检查中</dd></div>
+            <div><dt>版本</dt><dd>mobile-0.1.0</dd></div>
+          </dl>
+        </details>
+      </section>
+    </main>
+
+    <nav class="bottom-nav" aria-label="主导航">
+      <button id="voice-tab" class="nav-item active" type="button" data-view="voice-view">
+        <span class="nav-symbol">◉</span><span>收件箱</span>
+      </button>
+      <button id="focus-tab" class="nav-item" type="button" data-view="focus-view">
+        <span class="nav-symbol">◷</span><span>番茄钟</span>
+      </button>
+      <button id="history-tab" class="nav-item" type="button" data-view="history-view">
+        <span class="nav-symbol">≋</span><span>流水线</span>
+      </button>
+    </nav>
+
+    <div id="toast" class="toast" role="status" aria-live="polite"></div>
+    <script type="module" src="./app.js"></script>
+  </body>
+</html>

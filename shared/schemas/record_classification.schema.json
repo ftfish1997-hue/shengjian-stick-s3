@@ -1,0 +1,54 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.local/schemas/record_classification.schema.json",
+  "title": "M5StickS3 structured record",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "record_type": {
+      "type": "string",
+      "enum": ["idea", "activity", "task", "note", "journal", "inbox"]
+    },
+    "title": { "type": "string", "minLength": 1, "maxLength": 120 },
+    "summary": { "type": "string", "maxLength": 1000 },
+    "project": { "type": ["string", "null"], "maxLength": 120 },
+    "duration_minutes": { "type": ["integer", "null"], "minimum": 0 },
+    "completed": { "type": ["boolean", "null"] },
+    "tags": {
+      "type": "array",
+      "items": { "type": "string", "maxLength": 40 },
+      "maxItems": 12,
+      "uniqueItems": true
+    },
+    "follow_ups": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "content": { "type": "string", "minLength": 1, "maxLength": 300 },
+          "due_date": {
+            "oneOf": [
+              { "type": "string", "format": "date" },
+              { "type": "null" }
+            ]
+          }
+        },
+        "required": ["content", "due_date"]
+      },
+      "maxItems": 10
+    },
+    "confidence": { "type": "number", "minimum": 0, "maximum": 1 }
+  },
+  "required": [
+    "record_type",
+    "title",
+    "summary",
+    "project",
+    "duration_minutes",
+    "completed",
+    "tags",
+    "follow_ups",
+    "confidence"
+  ]
+}

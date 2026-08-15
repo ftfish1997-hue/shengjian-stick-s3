@@ -1,0 +1,15 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.local/schemas/upload_response.schema.json",
+  "title": "M5StickS3 upload response",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "success": { "const": true },
+    "event_id": { "type": "string", "format": "uuid" },
+    "record_id": { "type": "string", "format": "uuid" },
+    "status": { "const": "accepted" },
+    "duplicate": { "type": "boolean" }
+  },
+  "required": ["success", "event_id", "record_id", "status", "duplicate"]
+}

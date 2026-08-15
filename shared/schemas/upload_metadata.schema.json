@@ -1,0 +1,30 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.local/schemas/upload_metadata.schema.json",
+  "title": "M5StickS3 upload metadata",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "event_id": { "type": "string", "format": "uuid" },
+    "device_id": { "type": "string", "minLength": 1, "maxLength": 64 },
+    "captured_at": { "type": ["string", "null"], "format": "date-time" },
+    "kind": {
+      "type": "string",
+      "enum": ["voice_record", "pomodoro_note", "pomodoro_event"]
+    },
+    "session_id": { "type": ["string", "null"], "maxLength": 128 },
+    "duration_seconds": { "type": ["number", "null"], "minimum": 0, "maximum": 60 },
+    "firmware_version": { "type": "string", "maxLength": 32 },
+    "schema_version": { "const": 1 }
+  },
+  "required": [
+    "event_id",
+    "device_id",
+    "captured_at",
+    "kind",
+    "session_id",
+    "duration_seconds",
+    "firmware_version",
+    "schema_version"
+  ]
+}
